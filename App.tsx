@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// App.js
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './screens/HomeScreen';
+import DetailsScreen from './screens/DetailsScreen';
+import ImageScreen from './screens/ImageScreen'; // Asegúrate de importar correctamente
+import ComidaScreen from './screens/ComidaScreen';
+
+const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+        <Stack.Navigator initialRouteName='Home'>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Image" component={ImageScreen} options={{headerLeft:null}} />
+          <Stack.Screen name="Details" component={DetailsScreen} />
+          <Stack.Screen name="Foods" component={ComidaScreen} options={{headerShown:false}}/>
+        </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
